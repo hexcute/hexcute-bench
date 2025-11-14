@@ -1,0 +1,7 @@
+scripts/*.pdf
+scripts/*.txt
+scripts/demo*
+scripts/decoding*
+scripts/attn*
+scripts/fused_moe*
+scripts/matmul_standalone*

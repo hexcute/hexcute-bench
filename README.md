@@ -116,8 +116,7 @@ Outputs include:
 - Latex source code for kernel performance table (equivalent to Table II)
 To convert the source code into the `.pdf` format, run the command below (`pdflatex` is required).
 
-bash
-```
+```bash
 pdflatex performance_and_programmability.tex
 ```
 - Kernel performance plots (Figures 24–29)

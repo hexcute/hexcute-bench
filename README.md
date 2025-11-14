@@ -1,11 +1,16 @@
-# Hexcute Artifact (CGO 2026)
+# hexcute-bench
 
-This repository contains the artifact accompanying the paper:
+This repository contains the benchmark scripts for our paper:
 
 **Hexcute: A Compiler Framework for Automating Layout Synthesis in GPU Programs**  
-_CGO 2026_
 
-The artifact includes source code, benchmark scripts, instructions, and tools required to reproduce all evaluation results reported in the paper.
+
+The repository structure is organized as follows:
+
+- `docker`: Contains the Dockerfiles for building the Docker containers needed for the runtime environment.
+- `hidet`: Contains the source code of Hexcute.
+- `scripts`: Includes the scripts to run the experiments presented in the paper.
+- `hexcute_results_demo`: Provides example figures generated during the artifact evaluation process.
 
 ---
 
@@ -50,7 +55,7 @@ This artifact enables reproduction of:
 
 ## 📥 Getting the Artifact
 
-Clone the repository:
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/hexcute/hexcute-bench
@@ -66,7 +71,7 @@ export PATH=$CUDA_HOME/bin:$PATH
 ```bash
 bash build.sh
 ```
-This script installs dependencies, builds kernels, and prepares the benchmark environment.
+This script installs dependencies and prepares the benchmark environment.
 (Docker users may build the provided Docker image instead.)
 
 ## ▶️ Running Experiments
@@ -105,11 +110,11 @@ After all benchmarks finish:
 ```bash
 bash parse_results.sh
 ```
-This script collects all raw logs and plots into the hexcute_results/ directory.
+This script collects all raw logs and plots and moves them into the `hexcute_results/` directory.
 
 Outputs include:
-Kernel performance table (equivalent to Table II)
-Render with:
+Latex source code for kernel performance table (equivalent to Table II)
+To convert the source code into the `.pdf` format, run the command below (`pdflatex` is required).
 
 bash
 ```

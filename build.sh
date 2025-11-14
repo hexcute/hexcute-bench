@@ -2,10 +2,10 @@
 root=$(pwd)
 mkdir -p $root/workspace
 
-git clone https://github.com/578rnskbjg-sudo/vllm.git $root/workspace/vllm_v8.2
-git clone https://github.com/578rnskbjg-sudo/vllm.git $root/workspace/vllm_v9.2
+git clone https://github.com/hexcute/vllm.git $root/workspace/vllm_v8.2
+git clone https://github.com/hexcute/vllm.git $root/workspace/vllm_v9.2
 # TODO: replace this with open source hidet
-git clone git@github.com:578rnskbjg-sudo/hidet.git $root/workspace/hidet
+git clone git@github.com:hexcute/hidet.git $root/workspace/hidet
 
 cd $root/workspace
 

@@ -113,19 +113,19 @@ bash parse_results.sh
 This script collects all raw logs and plots and moves them into the `hexcute_results/` directory.
 
 Outputs include:
-Latex source code for kernel performance table (equivalent to Table II)
+- Latex source code for kernel performance table (equivalent to Table II)
 To convert the source code into the `.pdf` format, run the command below (`pdflatex` is required).
 
 bash
 ```
 pdflatex performance_and_programmability.tex
 ```
-Kernel performance plots (Figures 24–29)
+- Kernel performance plots (Figures 24–29)
 
-Mixed-type MoE evaluation (Figures 11 and 12)
+- Mixed-type MoE evaluation (Figures 11 and 12)
 
-Mamba scan evaluation (Figure 21)
+- Mamba scan evaluation (Figure 21)
 
-Cost model accuracy evaluation (Figure 20)
+- Cost model accuracy evaluation (Figure 20)
 
 Results may vary slightly due to system noise, but relative performance trends should match the paper.

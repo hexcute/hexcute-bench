@@ -1,0 +1,37 @@
+
+\documentclass[10pt,a4paper]{article}
+\usepackage{tabularx}
+\usepackage{multirow, makecell}
+\usepackage[bottom=0.5cm, right=0.5cm, left=0.5cm, top=1.5cm]{geometry}
+
+\begin{document}
+\begin{table*}[t!]
+{\scriptsize
+\begin{center}
+\begin{tabular}{cccccccccc}
+\hline
+ \multirow{2}{*}{\textbf{GPU}} & \multirow{2}{*}{\textbf{Operator}} & \multirowcell{2}{\textbf{Evaluated}\\\textbf{Shapes}} & \multicolumn{3}{c}{\textbf{Lines of Code}}&\multirow{2}{*}{\textbf{Performance Baseline}}&\multicolumn{2}{c}{\textbf{Normalized Performance}} \\
+ & & & \textbf{CUDA}& \textbf{Triton}& \textbf{Hexcute}& &\textbf{Triton}& \textbf{Hexcute}
+\\
+\hline
+\multirowcell{4}{NVIDIA\\ A100 GPU} & FP16 GEMM&40& 703$^\mathrm{b}$ & 71 & 98 & cuBLAS & 0.75$\times$ & \textbf{1.01$\times$} &  \\
+& Fused MHA$^\mathrm{a}$ Forward&20& 577 & 114 & 172 & FlashAttention2 & 0.91$\times$ & \textbf{1.49$\times$} \\
+& Fused MHA Decoding&24& 322 & 224 & 253 & FlashInfer & 0.50$\times$ & \textbf{1.02$\times$} \\
+\hline
+\multirowcell{3}{NVIDIA \\ H100 GPU} & Blockwise Scaled FP8 GEMM & 35 & 900 & 87 & 180 & CUTLASS & 0.57$\times$ & \textbf{1.26$\times$} \\
+%\hline
+& Warp Specialized FP16 GEMM & 40 & 1024$^\mathrm{b}$ & 71 & 169 & cuBLAS & 0.67$\times$ & \textbf{1.32$\times$} \\
+%\hline
+& Fused MHA Forward & 20 & 1684 & 114 & 212 & FlashAttention3 & 0.53$\times$ & \textbf{1.10$\times$} \\
+%& Mixed-type Mixture of Expert &  &  & & & Marlin & & \\
+\hline
+\multicolumn{10}{l}{$^{\mathrm{a}}$ Multi-head Attention}\\
+\multicolumn{10}{l}{$^{\mathrm{b}}$ For GEMM, speedups are reported against cuBLAS, while LoC comparisons use CUTLASS because cuBLAS is closed‑source.}
+\end{tabular}
+\vspace{-5mm}
+\label{general-operators}
+\end{center}
+}
+\end{table*}
+
+\end{document}

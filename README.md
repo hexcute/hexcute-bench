@@ -114,7 +114,7 @@ cd scripts
 ```
 > Note: These scripts lock GPU frequencies for reproducibility and require the `sudo` privilege when run on the host machine. Inside the container, the privilege is granted via the --privileged option.
 
-3. Run the benchmarks
+3. Run the benchmarks  
 A100 kernel performance (approximately 5 hours)
 ```bash
 bash run_a100.sh

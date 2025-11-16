@@ -2,10 +2,10 @@
 # run on hopper
 set -e
 
-DOCKER=false
+DOCKER=true
 for arg in "$@"; do
-  if [ "$arg" == "--docker" ]; then
-    DOCKER=true
+  if [ "$arg" == "--host" ]; then
+    DOCKER=false
     break
   fi
 done

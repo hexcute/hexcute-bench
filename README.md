@@ -76,6 +76,19 @@ docker run --privileged \
 
 > Note: `--privileged` is required because the benchmark scripts lock the GPU's frequency.
 
+**Option 1' — Building the Docker image locally**
+
+1. Navigate to the `docker` directory:
+```bash
+cd docker
+```
+2. Build the Docker image:
+
+```bash
+docker build -f Dockerfile -t hexcute:latest .
+```
+Note: Building the image takes approximately 20 minutes.
+
 **Option 2 - Building locally**
 1. Set environment variables
 ```bash

@@ -16,20 +16,13 @@ The repository structure is organized as follows:
 
 ## 📦 Artifact Overview
 
-Hexcute provides:
-
-- A tile-level GPU programming model with explicit control over shared memory and registers  
-- Automated layout synthesis for register tensors and shared-memory tensors  
-- Constraint-based instruction selection and layout propagation  
-- Compatibility with warp specialization and modern GPU collective instructions  
-
-This artifact enables reproduction of:
+This artifact enables reproducibility of:
 
 - Kernel performance benchmarks (GEMM, Attention, FP8 GEMM, warp-specialized kernels)  
 - Mixed-type MoE evaluation  
 - Mamba selective scan evaluation  
 - Analytical cost model accuracy tests  
-- All plots in Figures 11, 12, 20, 21, and 24–29 of the paper  
+- Plots in Figures 11, 12, 20, 21, and 24–29 of the paper  
 
 ---
 
@@ -37,19 +30,22 @@ This artifact enables reproduction of:
 
 ### Hardware
 - x86-64 Linux host  
-- ≥ 20 CPU cores  
-- ≥ 100 GB RAM  
-- ≥ 100 GB free disk space  
+- $\ge$ 20 CPU cores  
+- $\ge$ 100 GB RAM  
+- $\ge$ 100 GB free disk space  
 - NVIDIA A100 PCIe (80 GB)  
 - NVIDIA H100 PCIe (80 GB)
 
 ### Software
-- CUDA Toolkit ≥ 12.6  
-- CMake ≥ 3.19  
-- Python ≥ 3.10 (Python 3.12 recommended)  
-- Ubuntu 20.04+ (24.04 recommended)  
-- NVIDIA driver ≥ 550  
-- Optional: Docker 24+  
+**Option 1 — Build using the provided Docker image**
+- Docker (validated on Docker 29)
+
+**Option 2 — Build locally using `build.sh`**
+- CUDA Toolkit $\ge$ 12.6  
+- CMake $\ge$ 3.19  
+- Python $\ge$ 3.10 (validated with Python 3.12 )  
+- Ubuntu 20.04+ (validated with Ubuntu 24.04)  
+- NVIDIA Driver $\ge$ 550 (validated with Driver 580)
 
 ---
 
@@ -62,6 +58,24 @@ git clone https://github.com/hexcute/hexcute-bench
 cd hexcute-bench
 ```
 ## ⚙️ Installation
+**Option 1 — Using the provided Docker image**
+
+1. Pull the container image
+```bash
+docker pull ghcr.io/hexcute/hexcute-bench/hexcute:latest
+```
+
+2. Run inside the container
+```bash
+docker run --privileged \
+    -v /path/to/hexcute-bench:/workspace/hexcute-bench \
+    --gpus all -it \
+    ghcr.io/hexcute/hexcute-bench/hexcute:latest /bin/bash
+```
+
+> Note: `--privileged` is required because the benchmark scripts lock the GPU's frequency.
+
+**Option 2 - Building locally**
 1. Set environment variables
 ```bash
 export CUDA_HOME=/path/to/cuda
@@ -72,7 +86,6 @@ export PATH=$CUDA_HOME/bin:$PATH
 bash build.sh
 ```
 This script installs dependencies and prepares the benchmark environment.
-(Docker users may build the provided Docker image instead.)
 
 ## ▶️ Running Experiments
 1. Set environment variables
@@ -85,10 +98,10 @@ export root=/absolute/path/to/hexcute-bench
 ```bash
 cd scripts
 ```
-Note: These scripts lock GPU frequency for reproducibility and require `sudo` privileges.
+> Note: These scripts lock GPU frequencies for reproducibility and require the `sudo` privilege when run on the host machine. Inside the container, the privilege is granted via the --privileged option.
 
 3. Run the benchmarks
-A100 kernel performance (≈ 5 hours)
+A100 kernel performance (approximately 5 hours)
 ```bash
 bash run_a100.sh
 ```
@@ -104,20 +117,22 @@ Mamba selective scan evaluation
 ```bash
 bash run_scan.sh
 ```
+> Note: When running outside Docker (i.e., on the host machine), you must provide the `--host` argument to the benchmark scripts. 
+
 ## 📊 Generating Final Results
 After all benchmarks finish:
 
 ```bash
 bash parse_results.sh
 ```
-This script collects all raw logs and plots and moves them into the `hexcute_results/` directory.
+This script moves the plots into the `hexcute_results/` directory.
 
 Outputs include:
 - Latex source code for kernel performance table (equivalent to Table II)
 To convert the source code into the `.pdf` format, run the command below (`pdflatex` is required).
 
 ```bash
-pdflatex performance_and_programmability.tex
+pdflatex Table_II.tex
 ```
 - Kernel performance plots (Figures 24–29)
 

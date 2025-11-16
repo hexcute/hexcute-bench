@@ -18,17 +18,16 @@
 & Fused MHA$^\mathrm{a}$ Forward&20& 577 & 114 & 172 & FlashAttention2 & 0.91$\times$ & \textbf{1.49$\times$} \\
 & Fused MHA Decoding&24& 322 & 224 & 253 & FlashInfer & 0.50$\times$ & \textbf{1.02$\times$} \\
 \hline
-\multirowcell{3}{NVIDIA \\ H100 GPU} & Blockwise Scaled FP8 GEMM & 35 & 900 & 87 & 180 & CUTLASS & 0.57$\times$ & \textbf{1.26$\times$} \\
+\multirowcell{3}{NVIDIA \\ H100 GPU} & Blockwise Scaled FP8 GEMM & 35 & 900 & 87 & 180 & CUTLASS & 0.50$\times$ & \textbf{1.17$\times$} \\
 %\hline
-& Warp Specialized FP16 GEMM & 40 & 1024$^\mathrm{b}$ & 71 & 169 & cuBLAS & 0.67$\times$ & \textbf{1.32$\times$} \\
+& Warp Specialized FP16 GEMM & 40 & 1024$^\mathrm{b}$ & 71 & 169 & cuBLAS & 0.61$\times$ & \textbf{1.27$\times$} \\
 %\hline
-& Fused MHA Forward & 20 & 1684 & 114 & 212 & FlashAttention3 & 0.53$\times$ & \textbf{1.10$\times$} \\
+& Fused MHA Forward & 20 & 1684 & 114 & 212 & FlashAttention3 & 0.54$\times$ & \textbf{1.21$\times$} \\
 %& Mixed-type Mixture of Expert &  &  & & & Marlin & & \\
 \hline
 \multicolumn{10}{l}{$^{\mathrm{a}}$ Multi-head Attention}\\
 \multicolumn{10}{l}{$^{\mathrm{b}}$ For GEMM, speedups are reported against cuBLAS, while LoC comparisons use CUTLASS because cuBLAS is closed‑source.}
 \end{tabular}
-\vspace{-5mm}
 \label{general-operators}
 \end{center}
 }

@@ -34,7 +34,8 @@ This artifact enables reproducibility of:
 - $\ge$ 100 GB RAM  
 - $\ge$ 100 GB free disk space  
 - NVIDIA A100 PCIe (80 GB)  
-- NVIDIA H100 PCIe (80 GB)
+- NVIDIA H100 PCIe or SXM (80GB) 
+  (Benchmarks were conducted on H100 PCIe GPUs; results on H100 SXM (80 GB) may differ slightly.)
 
 ### Software
 **Option 1 — Build using the provided Docker image**

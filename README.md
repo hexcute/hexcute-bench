@@ -131,7 +131,7 @@ Mamba selective scan evaluation
 ```bash
 bash run_scan.sh
 ```
-> Note: When running outside Docker (i.e., on the host machine), you must provide the `--host` argument to the benchmark scripts. 
+> Note: When running outside Docker (i.e., on the host machine), you must provide the `--host` argument to the benchmark scripts. When using the provided Docker image, `--host` is **not** needed since the scripts default to the container environment.
 
 ## 📊 Generating Final Results
 After all benchmarks finish:
@@ -142,7 +142,7 @@ bash parse_results.sh
 This script moves the plots into the `hexcute_results/` directory.
 
 Outputs include:
-- Latex source code for kernel performance table (equivalent to Table II)
+- LaTeX source code for kernel performance table (equivalent to Table II)
 To convert the source code into the `.pdf` format, run the command below (`pdflatex` is required).
 
 ```bash

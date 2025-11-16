@@ -38,7 +38,7 @@ This artifact enables reproducibility of:
 
 ### Software
 **Option 1 — Build using the provided Docker image**
-- Docker (validated on Docker 29)
+- Docker (validated with Docker 29)
 
 **Option 2 — Build locally using `build.sh`**
 - CUDA Toolkit $\ge$ 12.6  

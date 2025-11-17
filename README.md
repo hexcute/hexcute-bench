@@ -45,7 +45,7 @@ This artifact enables reproducibility of:
 - CUDA Toolkit $\ge$ 12.6  
 - CMake $\ge$ 3.19  
 - Python $\ge$ 3.10 (validated with Python 3.12 )  
-- Ubuntu 20.04+ (validated with Ubuntu 24.04)  
+- Ubuntu 22.04+ (validated with Ubuntu 24.04)  
 - NVIDIA Driver $\ge$ 550 (validated with Driver 580)
 
 ---

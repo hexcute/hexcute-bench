@@ -101,6 +101,61 @@ bash build.sh
 ```
 This script installs dependencies and prepares the benchmark environment.
 
+## 🛠 Troubleshooting (Local Build)
+
+We recommend running the artifact inside the provided Docker container.  
+For users who prefer running locally, this section lists common issues encountered when using the `build.sh` script, along with recommended fixes.
+
+### 1. Missing `Python.h` header
+If you see an error indicating that `Python.h` cannot be found, the Python development headers are likely missing. Install them with:
+
+```bash
+sudo apt update
+sudo apt install python3-dev
+```
+
+### 2. `AssertionError: 35`
+This error typically occurs when the installed `cuda-python` package is newer than the NVIDIA driver on the machine.
+To resolve this, downgrade the cuda-python (also known as cuda.binding) package:
+
+```bash
+pip uninstall cuda-python
+# Select the CUDA Toolkit version that matches your driver
+pip install cuda-python==12.8
+```
+
+### 3. FlashAttention 3 installation error
+
+If FlashAttention 3 fails to build during a local installation, you can install it manually using the commands below without re-running the entire `build.sh` script:
+
+```bash
+export root=/path/to/hexcute-bench
+source $root/workspace/vllm_v9_2/bin/activate
+
+# Ensure the flash-attention repository is present and up to date.
+cd $root/workspace/flash-attention/hopper
+git checkout v2.8.2
+
+export FLASH_ATTENTION_DISABLE_FP8=TRUE
+export FLASH_ATTENTION_DISABLE_SM80=TRUE
+export FLASH_ATTENTION_DISABLE_BACKWARD=TRUE
+export FLASH_ATTENTION_DISABLE_PAGEDKV=TRUE
+export FLASH_ATTENTION_DISABLE_APPENDKV=TRUE
+export FLASH_ATTENTION_DISABLE_SOFTCAP=TRUE
+export MAX_JOBS=10
+
+python3 setup.py install
+deactivate
+```
+
+To verify the installation of FlashAttention 3, run the smoke test provided in the scripts directory:
+
+```bash
+bash ./run_smoke.sh --host
+```
+
+If FlashAttention 3 is installed successfully, the script should run without any `ImportError`. 
+
 ## ▶️ Running Experiments
 1. Set environment variables
 ```bash
@@ -132,6 +187,7 @@ Mamba selective scan evaluation
 bash run_scan.sh
 ```
 > Note: When running outside Docker (i.e., on the host machine), you must provide the `--host` argument to the benchmark scripts. When using the provided Docker image, `--host` is **not** needed since the scripts default to the container environment.
+> Note: `run_h100.sh` is specific to H100 GPUs and cannot run on A100 GPUs. The experiments in `run_moe.sh` and `run_scan.sh` were conducted on an H100 GPU, but both scripts are portable and can also run on an A100.
 
 ## 📊 Generating Final Results
 After all benchmarks finish:

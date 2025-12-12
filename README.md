@@ -213,16 +213,3 @@ pdflatex Table_II.tex
 - Cost model accuracy evaluation (Figure 20)
 
 Results may vary slightly due to system noise, but relative performance trends should match the paper.
-
-## 🔧 Customization
-
-All benchmark scripts support running individual shapes and can accept user-defined tensor dimensions. This allows you to explore workloads beyond those evaluated in the paper.
-
-For example, to benchmark a custom FP16 GEMM shape:
-
-```bash
-python3 benchmark_warp_specialized_gemm_non_persistent.py \
-    --m 4096 --n 4096 --k 4096 \
-    --search-space 2 \
-    --cache-dir ./demo_hopper_gemm
-```
